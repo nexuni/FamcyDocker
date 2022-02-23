@@ -57,7 +57,7 @@ docker-compose -f docker-compose.http.prod.yml restart
 docker-compose -f docker-compose.http.prod.yml down -v
 ```
 
-## Flask + Gunicorn + Nginx + Certbot
+## Flask + Gunicorn + Nginx + Certbot (NEED FURTHER TESTING!)
 This is for global use and https production deploy.
 
 Run
