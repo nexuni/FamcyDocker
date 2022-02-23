@@ -1,7 +1,7 @@
 version: '3'
 services:
   famcy:
-    image: nexuni/famcy:1.0.beta.5
+    image: nexuni/famcy:1.0
     command: 
       - bash
       - -c 
@@ -26,8 +26,8 @@ services:
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
     ports:
-      - 1080:1080
-      - 10443:10443
+      - 80:80
+      - 443:443
     restart: always
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   certbot:
