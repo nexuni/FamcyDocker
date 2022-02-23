@@ -23,7 +23,7 @@ FAMCY_SRC_FOLDER={YOUR FAMCY SRC LOCATION}
     container_name: famcy
     volumes:
       - ${FAMCY_SRC_FOLDER}:/app/.local/share/famcy/dev/console
-      - {THE FOLDER ON YOUR HOST THAT YOU WANT TO LINK}:/app/.local/share/famcy/dev/console/_static_/image/lpr_data
+      - /lpr_data:/app/.local/share/famcy/dev/console/_static_/image/lpr_data # This is an example to link user statics
     ports:
       - "8888:8888"
 ...
