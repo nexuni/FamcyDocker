@@ -1,0 +1,4 @@
+location /static/  {
+    alias /app/.local/share/famcy/dev/venv/lib/python3.7/site-packages/Famcy/static/;
+    add_header Access-Control-Allow-Origin *;
+}

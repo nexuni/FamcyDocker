@@ -13,7 +13,20 @@ services:
         gunicorn -b 0.0.0.0:8888 Famcy.wsgi:app
     container_name: famcy
     volumes:
-      - /Users/weitung/websites/proj-007-pms:/app/.local/share/famcy/dev/console
+      - ${FAMCY_SRC_FOLDER}:/app/.local/share/famcy/dev/console
+      - static_volume:/app/.local/share/famcy/dev/venv/lib/python3.7/site-packages/Famcy/static/
     ports:
-      - "8888:8888"
       - "6379:6379"
+    expose:
+      - 8888
+  nginx:
+    build: ./nginx-http
+    volumes:
+      - static_volume:/app/.local/share/famcy/dev/venv/lib/python3.7/site-packages/Famcy/static/
+    ports:
+      - 8888:80
+    depends_on:
+      - famcy
+
+volumes:
+  static_volume:
