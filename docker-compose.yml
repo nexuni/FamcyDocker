@@ -1,10 +1,15 @@
 version: '3'
 services:
   famcy:
-    image: nexuni/famcy:1.0.beta.4
-    command: gunicorn -b 0.0.0.0:8888 Famcy.wsgi:app
+    image: nexuni/famcy:1.0.beta.5
+    command: 
+      - bash
+      - -c 
+      - |
+        redis-server &
+        gunicorn -b 0.0.0.0:8888 Famcy.wsgi:app
     container_name: famcy
     volumes:
-      - /Users/weitung/.local/share/famcy/weitung/console:/app/.local/share/famcy/dev/console
+      - E:\nexuni\Famcy_tutorial\console:/app/.local/share/famcy/dev/console
     ports:
       - "8888:8888"
