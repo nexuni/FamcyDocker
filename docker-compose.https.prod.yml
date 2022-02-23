@@ -14,41 +14,28 @@ services:
     container_name: famcy
     volumes:
       - ${FAMCY_SRC_FOLDER}:/app/.local/share/famcy/dev/console
+      - static_volume:/app/.local/share/famcy/dev/venv/lib/python3.7/site-packages/Famcy/static/
     ports:
       - "6379:6379"
     expose:
       - 8888
-  nginx-proxy:
-    container_name: nginx-proxy
-    build: nginx-https
-    restart: always
-    ports:
-      - 10443:10443
-      - 1080:1080
+  nginx:
+    build: ./nginx-https
     volumes:
       - static_volume:/app/.local/share/famcy/dev/venv/lib/python3.7/site-packages/Famcy/static/
-      - certs:/etc/nginx/certs
-      - html:/usr/share/nginx/html
-      - vhost:/etc/nginx/vhost.d
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+    ports:
+      - 1080:80
+      - 10443:443
+    restart: always
     depends_on:
       - famcy
-    labels:
-      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
-  nginx-proxy-letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
+  certbot:
+    image: certbot/certbot:latest
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - certs:/etc/nginx/certs
-      - html:/usr/share/nginx/html
-      - vhost:/etc/nginx/vhost.d
-      - acme:/etc/acme.sh
-    depends_on:
-      - nginx-proxy
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
 
 volumes:
   static_volume:
-  certs:
-  html:
-  vhost:
-  acme:
