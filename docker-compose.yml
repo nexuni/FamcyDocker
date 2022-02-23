@@ -13,7 +13,7 @@ services:
         gunicorn -b 0.0.0.0:8888 Famcy.wsgi:app
     container_name: famcy
     volumes:
-      - /Users/weitung/websites/proj-007-pms:/app/.local/share/famcy/dev/console
+      - ${FAMCY_SRC_FOLDER}:/app/.local/share/famcy/dev/console
     ports:
       - "8888:8888"
       - "6379:6379"
