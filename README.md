@@ -1,9 +1,9 @@
 # Docker for Famcy
 This is the docker for Famcy deploy. It is separated into three deployment scheme:
 
-	1. Flask + Gunicorn (for development and quick deploy, can also be integrated into existing nginx settings)
-	2. Flask + Gunicorn + Nginx (for internal use / http production deploy)
-	3. Flask + Gunicorn + Nginx + Certbot (for global use / https production deploy)
+1. Flask + Gunicorn (for development and quick deploy, can also be integrated into existing nginx settings)
+2. Flask + Gunicorn + Nginx (for internal use / http production deploy)
+3. Flask + Gunicorn + Nginx + Certbot (for global use / https production deploy)
 
 ## Prerequisite
 1. [Install Docker Engine](https://docs.docker.com/engine/install/)
