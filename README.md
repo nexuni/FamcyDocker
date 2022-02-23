@@ -28,6 +28,8 @@ FAMCY_SRC_FOLDER={YOUR FAMCY SRC LOCATION}
       - "8888:8888"
 ...
 ```
+5. Run the startup command based on the scheme you chose. (Check the sections below)
+6. Go to http://127.0.0.1:8888 or the domain you set to check out your famcy page. 
 
 ## Flask + Gunicorn
 This is for development and quick deploy, can also be integrated into existing nginx settings.
