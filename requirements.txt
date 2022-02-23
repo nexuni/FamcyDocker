@@ -1,0 +1,4 @@
+famcy
+famcytools
+gunicorn==19.7.1
+virtualenv==15.1.0
