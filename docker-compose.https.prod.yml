@@ -23,8 +23,8 @@ services:
     build: nginx-https
     restart: always
     ports:
-      - 443:443
-      - 80:80
+      - 10443:10443
+      - 1080:1080
     volumes:
       - static_volume:/app/.local/share/famcy/dev/venv/lib/python3.7/site-packages/Famcy/static/
       - certs:/etc/nginx/certs
@@ -33,8 +33,10 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
       - famcy
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
   nginx-proxy-letsencrypt:
-    image: nginxproxy/acme-companion
+    image: jrcs/letsencrypt-nginx-proxy-companion
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - certs:/etc/nginx/certs
