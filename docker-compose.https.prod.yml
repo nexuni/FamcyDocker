@@ -7,6 +7,7 @@ services:
       - -c 
       - |
         cd /app/.local/share/famcy/dev && . venv/bin/activate && cd console
+        pip3 install famcy --upgrade
         pip3 install -r requirements.txt
         redis-server &
         cd /app/.local/share/famcy/dev/venv/lib/python3.7/site-packages 
