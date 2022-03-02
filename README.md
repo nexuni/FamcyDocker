@@ -8,6 +8,7 @@ This is the docker for Famcy deploy. It is separated into three deployment schem
 ## Prerequisite
 1. [Install Docker Engine](https://docs.docker.com/engine/install/)
 2. [Install Docker Compose](https://docs.docker.com/compose/install/)
+
 To install the latest version:
 ```
 sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
