@@ -10,6 +10,7 @@ services:
         pip3 install famcy --upgrade
         pip3 install -r requirements.txt
         redis-server &
+        famcy deploy dev
         cd /app/.local/share/famcy/dev/venv/lib/python3.7/site-packages 
         gunicorn -b 0.0.0.0:8888 Famcy.wsgi:app
     container_name: famcy
