@@ -8,6 +8,11 @@ This is the docker for Famcy deploy. It is separated into three deployment schem
 ## Prerequisite
 1. [Install Docker Engine](https://docs.docker.com/engine/install/)
 2. [Install Docker Compose](https://docs.docker.com/compose/install/)
+To install the latest version:
+```
+sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
 
 ## Quick Start
 
@@ -72,3 +77,10 @@ If you want to restart or shut it down, use the following commands:
 docker-compose -f docker-compose.https.prod.yml restart
 docker-compose -f docker-compose.https.prod.yml down -v
 ```
+
+## Known Issue
+It is reported that desktop docker might encounter mount error such as the one below:
+```
+Error response from daemon: error while creating mount source path
+```
+*Solution*: restart docker desktop
