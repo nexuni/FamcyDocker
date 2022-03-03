@@ -12,9 +12,7 @@ services:
         redis-server &
         famcy deploy dev
         cd /app/.local/share/famcy/dev/venv/lib/python3.7/site-packages 
-        export FLASK_ENV=development
-        export DEBUG=True
-        python3 wsgi.py
+        gunicorn -b 0.0.0.0:8888 Famcy.wsgi:app
     container_name: famcy
     volumes:
       - ${FAMCY_SRC_FOLDER}:/app/.local/share/famcy/dev/console
