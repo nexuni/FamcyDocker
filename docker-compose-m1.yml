@@ -1,0 +1,21 @@
+version: '3'
+services:
+  famcy:
+    image: nexuni/famcy:1.0.m1
+    command: 
+      - bash
+      - -c 
+      - |
+        cd /app/.local/share/famcy/dev && . venv/bin/activate && cd console
+        pip3 install famcy --upgrade
+        pip3 install -r requirements.txt
+        redis-server &
+        famcy deploy dev
+        cd /app/.local/share/famcy/dev/venv/lib/python3.7/site-packages 
+        gunicorn -b 0.0.0.0:8888 Famcy.wsgi:app
+    container_name: famcy
+    volumes:
+      - /Users/wangchungcheng/gadgethi/ICT-central-web:/app/.local/share/famcy/dev/console
+    ports:
+      - "8888:8888"
+      - "6379:6379"
