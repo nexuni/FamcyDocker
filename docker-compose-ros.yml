@@ -1,0 +1,44 @@
+version: '3'
+services:
+  famcy-ros:
+    image: nexuni/famcy:1.0.ros
+    command: 
+      - bash
+      - -c 
+      - |
+        cd /root/.local/share/famcy/dev && . venv/bin/activate && cd console
+        pip3 install famcy --upgrade
+        pip3 install famcytools --upgrade
+        pip3 install -r requirements.txt
+        redis-server &
+        famcy deploy dev
+        cd /root/.local/share/famcy/dev/venv/lib/python3.8/site-packages/Famcy
+        export FLASK_ENV=development
+        export DEBUG=True
+        python3 wsgi.py
+    container_name: famcy-ros
+    volumes:
+      - ${FAMCY_SRC_FOLDER}:/root/.local/share/famcy/dev/console
+    ports:
+      - "8888:8888"
+      - "6379:6379"
+      - "6080:6080"
+    environment:
+      - DISPLAY=novnc:0.0
+    depends_on:
+      - novnc
+    networks:
+      - x11
+  novnc:
+    image: theasp/novnc:latest
+    environment:
+      # Adjust to your screen size
+      - DISPLAY_WIDTH=1600
+      - DISPLAY_HEIGHT=968
+      - RUN_XTERM=no
+    ports:
+      - "8080:8080"
+    networks:
+      - x11
+networks:
+  x11:
