@@ -4,16 +4,19 @@ services:
     image: nexuni/ros2:galactic.desktop.compiled.1
     container_name: ros-compiled
     privileged: true
-    volumes:
-      - ~/.ssh:/root/.ssh
-      - ${SRC_FOLDER}:/root/nexi_ws/src
-    command: tail -F anything
-      # - bash
-      # - -c 
-      # - |
-      #   source /root/nexi_ws/install/setup.bash
-      #   ros2 launch nexi_bringup sim.launch.py
-      #   tail -F anything
+    # volumes:
+    #   - ~/.ssh:/root/.ssh
+    #   - ${SRC_FOLDER}:/root/nexi_ws/src
+    command:
+      - bash
+      - -c 
+      - |
+        source /root/nexi_ws/install/setup.bash
+        sleep 10
+        rviz2 -d /root/nexi_ws/install/nexi_simulator/share/nexi_simulator/rviz/sim.rviz &
+        sleep 2
+        ros2 launch nexi_bringup sim.launch.py
+        tail -F anything
     environment:
       - DISPLAY=novnc:0.0
     depends_on:
@@ -34,6 +37,7 @@ services:
         redis-server &
         famcy deploy dev
         cd /root/.local/share/famcy/dev/venv/lib/python3.8/site-packages/Famcy
+        . /opt/ros/galactic/setup.bash
         export FLASK_ENV=development
         export DEBUG=True
         python3 wsgi.py
