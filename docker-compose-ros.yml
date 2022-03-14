@@ -1,7 +1,25 @@
 version: '3'
 services:
+  ros-compiled:
+    image: nexuni/ros2:galactic.desktop.compiled.1
+    container_name: ros-compiled
+    privileged: true
+    command: 
+      - bash
+      - -c 
+      - |
+        source /root/nexi_ws/install/setup.bash
+        ros2 launch nexi_bringup sim.launch.py
+        tail -F anything
+    environment:
+      - DISPLAY=novnc:0.0
+    depends_on:
+      - novnc
+    networks:
+      - x11
+      - ros
   famcy-ros:
-    image: nexuni/famcy:1.0.ros
+    image: nexuni/famcy:1.0
     command: 
       - bash
       - -c 
@@ -26,9 +44,9 @@ services:
     environment:
       - DISPLAY=novnc:0.0
     depends_on:
-      - novnc
+      - ros-compiled
     networks:
-      - x11
+      - ros
   novnc:
     image: theasp/novnc:latest
     environment:
@@ -40,5 +58,7 @@ services:
       - "8080:8080"
     networks:
       - x11
+
 networks:
   x11:
+  ros:
