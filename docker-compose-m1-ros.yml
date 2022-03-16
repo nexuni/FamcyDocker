@@ -55,7 +55,7 @@ services:
     networks:
       - ros
   novnc:
-    image: theasp/novnc:latest
+    image: nexuni/vnc:latest
     environment:
       # Adjust to your screen size
       - DISPLAY_WIDTH=1600
