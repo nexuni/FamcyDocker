@@ -1,12 +1,12 @@
 version: '3'
 services:
   ros-compiled:
-    image: nexuni/ros2:galactic.desktop.compiled.1
+    image: nexuni/ros2:galactic.desktop.compiled.3
     container_name: ros-compiled
     privileged: true
-    # volumes:
-    #   - ~/.ssh:/root/.ssh
-    #   - ${SRC_FOLDER}:/root/nexi_ws/src
+    volumes:
+      - ~/.ssh:/root/.ssh
+      - ${SRC_FOLDER}:/root/nexi_ws/src
     command:
       - bash
       - -c 
