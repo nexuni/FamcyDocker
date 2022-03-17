@@ -1,4 +1,4 @@
-FROM ros:galactic
+FROM nexuni/ros2:galactic.desktop.beta.3
 
 COPY requirements.txt requirements.txt
 RUN apt-get update && apt-get install wget ffmpeg libsm6 libxslt-dev libxext6 redis-server python3.8-venv python3-pip -y
