@@ -11,6 +11,7 @@ services:
       - -c 
       - |
         source /root/nexi_ws/install/setup.bash
+        sleep 2
         rviz2 -d /root/nexi_ws/install/nexi_simulator/share/nexi_simulator/rviz/sim.rviz &
         cd /root/.local/share/famcy/dev && . venv/bin/activate && cd console
         pip3 install famcy --upgrade
