@@ -19,7 +19,7 @@ services:
         pip3 install -r requirements.txt
         redis-server &
         famcy deploy dev
-        ros2 launch nexi_bringup sim.launch.py &
+        ros2 launch nexi_bringup sim.launch.py 1>&- 2>&-  &
         cd /root/.local/share/famcy/dev/venv/lib/python3.8/site-packages/Famcy
         export FLASK_ENV=development
         export DEBUG=True
