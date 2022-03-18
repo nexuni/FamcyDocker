@@ -19,11 +19,11 @@ services:
         pip3 install -r requirements.txt
         redis-server &
         famcy deploy dev
-        cd /root/.local/share/famcy/dev/venv/lib/python3.8/site-packages/Famcy
         . /opt/ros/galactic/setup.bash
+        ros2 launch nexi_bringup sim.launch.py &
+        cd /root/.local/share/famcy/dev/venv/lib/python3.8/site-packages/Famcy
         export FLASK_ENV=development
         export DEBUG=True
-        ros2 launch nexi_bringup sim.launch.py &
         python3 wsgi.py
     container_name: famcy-ros
     volumes:
