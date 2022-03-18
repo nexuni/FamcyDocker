@@ -3,9 +3,9 @@ services:
   famcy-ros:
     image: nexuni/famcy:ros.1.0.compiled
     privileged: true
-    volumes:
-      - ~/.ssh:/root/.ssh
-      - ${SRC_FOLDER}:/root/nexi_ws/src
+    # volumes:
+    #   - ~/.ssh:/root/.ssh
+    #   - ${SRC_FOLDER}:/root/nexi_ws/src
     command: 
       - bash
       - -c 
